@@ -11,19 +11,25 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>BTasks</q-toolbar-title>
 
         <div>
           <q-btn-group>
-            <q-btn color="black" glossy to="/">Inicio</q-btn>
             <q-btn
               color="green"
+              class="q-mr-sm"
               glossy
-              @click="accessUser"
+              to="/login"
               v-if="!userStore.token"
               >Login</q-btn
             >
-            <q-btn color="red" glossy @click="logout" v-if="userStore.token"
+            <q-btn class="q-mr-sm" color="green" glossy to="/register" v-if="!userStore.token"
+              >Register</q-btn
+            >
+            <q-btn class="q-mr-sm" color="black" glossy to="/" v-if="userStore.token"
+              >Inicio</q-btn
+            >
+            <q-btn class="q-mr-sm" color="red" glossy @click="logout" v-if="userStore.token"
               >Logout</q-btn
             >
             <q-btn color="purple" glossy to="/protected" v-if="userStore.token"
@@ -62,15 +68,15 @@ const leftDrawerOpen = ref(false);
 const userStore = useUserStore();
 const router = useRouter();
 
-const logout = async() => {
+const logout = async () => {
   await userStore.logout();
   router.push("/login");
 };
 
-const accessUser = async() => {
+const accessUser = async () => {
   await userStore.access();
-  router.push("/")
-}
+  router.push("/");
+};
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
