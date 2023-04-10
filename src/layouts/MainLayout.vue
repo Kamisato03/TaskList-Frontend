@@ -32,8 +32,8 @@
             <q-btn class="q-mr-sm" color="red" glossy @click="logout" v-if="userStore.token"
               >Logout</q-btn
             >
-            <q-btn color="purple" glossy to="/protected" v-if="userStore.token"
-              >Protected</q-btn
+            <q-btn color="purple" glossy to="/links" v-if="userStore.token"
+              >Links</q-btn
             >
           </q-btn-group>
         </div>

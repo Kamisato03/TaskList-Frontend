@@ -2,7 +2,7 @@
   <q-page padding class="row justify-center">
     <div class="col-12 col-sm-6 col-md-5">
       <h3>Login</h3>
-      <q-form @submit.prevent="handleSubmit">
+      <q-form @submit.prevent="handleSubmit" ref="formAdd">
         <q-input
           v-model="email"
           label="Ingrese su correo"
@@ -12,6 +12,7 @@
               (val && /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val)) ||
               'Formato incorrecto de email',
           ]"
+          lazy-rules
         ></q-input>
         <q-input
           v-model="password"
@@ -22,6 +23,7 @@
               (val && val.length > 5) ||
               'La contraseña debe tener mínimo 6 caracteres',
           ]"
+          lazy-rules
         ></q-input>
         <div>
           <q-btn label="Login" type="submit"></q-btn>
@@ -41,6 +43,7 @@ const router = useRouter();
 const email = ref("");
 const password = ref("");
 const $q = useQuasar();
+const formAdd = ref(null);
 
 const handleSubmit = async () => {
   try {
@@ -48,6 +51,7 @@ const handleSubmit = async () => {
     router.push("/");
     email.value = "";
     password.value = "";
+    formAdd.value.resetValidation();
   } catch (error) {
     console.log(error);
     if (error.error) {

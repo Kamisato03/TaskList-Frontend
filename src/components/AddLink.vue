@@ -1,14 +1,15 @@
 <template>
-  <q-form @submit.prevent="addLink">
+  <q-form @submit.prevent="addLink" ref="formAdd">
     <q-input
       v-model="link"
       label="Ingrese link aquí"
       :rules="[
         (val) => (val && val.trim() !== '') || 'Escribe una url por favor',
       ]"
+      lazy-rules
     ></q-input>
     <q-btn
-      class="q-mt-2-sm"
+      class="q-mt-2-sm q-mb-sm"
       label="Agregar"
       color="primary"
       type="submit"
@@ -23,24 +24,26 @@ import { useLinkStore } from "src/stores/link-store";
 import { useNotify } from "src/composables/notifyHook";
 
 const linkStore = useLinkStore();
-const { showNotify } = useNotify();
+const { successNotify, errorNotify } = useNotify();
 
 const link = ref("");
 const loading = ref(false);
+const formAdd = ref(null);
 
 const addLink = async () => {
   try {
     loading.value = true;
     await linkStore.createLink(link.value);
-    showNotify("Link Agregado", "green");
+    successNotify("Link Agregado");
     link.value = "";
+    formAdd.value.resetValidation();
   } catch (error) {
     if (error.errors) {
       return error.errors.forEach((element) => {
-        showNotify(element.msg);
+        error(element.msg);
       });
     }
-    showNotify("Error al agregar");
+    errorNotify("Error al agregar");
   } finally {
     loading.value = false;
   }
