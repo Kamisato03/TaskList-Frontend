@@ -1,5 +1,5 @@
 <template>
-  <q-card class="my-card bg-grey-7 text-white q-mt-md q-mr-sm">
+  <q-card class="my-card bg-grey-5 text-white q-mt-md q-mr-sm">
     <q-card-section>
       <div class="text-overline">{{ link.nanoLink }}</div>
     </q-card-section>

@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="row justify-center">
-    <div class="col-12 col-sm-6 col-md-5">
+  <q-page class="row justify-center">
+    <div class="col-12 col-sm-6 q-mt-xl">
       <h3>Login</h3>
       <q-form @submit.prevent="handleSubmit" ref="formAdd">
         <q-input

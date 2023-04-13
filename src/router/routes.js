@@ -20,20 +20,13 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("pages/IndexPage.vue"),
+        component: () => import("pages/LinksPage.vue"),
         meta: {
           auth: true, // solo para las rutas protegidas
         },
       },
       { path: "login", component: () => import("pages/LoginPage.vue") },
       { path: "register", component: () => import("pages/RegisterPage.vue") },
-      {
-        path: "links",
-        component: () => import("pages/LinksPage.vue"),
-        meta: {
-          auth: true, // solo para las rutas protegidas
-        },
-      },
       {
         path: "/:nanoid",
         component: () => import("pages/RedirectPage.vue"),

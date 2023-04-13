@@ -1,6 +1,7 @@
 <template>
   <q-form @submit.prevent="addLink" ref="formAdd">
     <q-input
+    class="q-mb-xl"
       v-model="link"
       label="Ingrese link aquí"
       :rules="[

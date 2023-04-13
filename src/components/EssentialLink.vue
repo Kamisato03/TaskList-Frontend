@@ -1,49 +1,52 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target="_blank"
-    :href="link"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
-      <q-icon :name="icon" />
-    </q-item-section>
+  <q-toolbar>
+    <q-list>
+      <q-item clickable @click="navigateToHome">
+        <q-item-section>
+          <q-icon name="home" />
+          <q-item-label>Inicio</q-item-label>
+        </q-item-section>
+      </q-item>
 
-    <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>{{ caption }}</q-item-label>
-    </q-item-section>
-  </q-item>
+      <q-item clickable @click="logout">
+        <q-item-section>
+          <q-icon name="power_settings_new"> </q-icon>
+          <q-item-label>Desconectar</q-item-label>
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable @click="navigateToCreateLinks">
+        <q-item-section>
+          <q-icon name="add" />
+          <q-item-label>Crear enlaces</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-list>
+  </q-toolbar>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { useUserStore } from "../stores/user-store";
+import { useRouter } from "vue-router";
 
-export default defineComponent({
-  name: 'EssentialLink',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
+const userStore = useUserStore();
+const router = useRouter();
 
-    caption: {
-      type: String,
-      default: ''
-    },
+const logout = async () => {
+  await userStore.logout();
+  router.push("/login");
+};
 
-    link: {
-      type: String,
-      default: '#'
-    },
+const accessUser = async () => {
+  await userStore.access();
+  router.push("/");
+};
 
-    icon: {
-      type: String,
-      default: ''
-    }
-  }
-})
+const navigateToHome = () => {
+  // código para navegar a la página de inicio
+};
+
+const navigateToCreateLinks = () => {
+  // código para navegar a la página de creación de enlaces
+};
 </script>
