@@ -63,8 +63,12 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        FRONT_URI: ctx.dev ? "http://localhost:9000/" : "https://btasks.netlify.app/",
-        API_REST: ctx.dev ? "http://localhost:5000/api/v1" : "https://apitask-e468.onrender.com/api/v1",
+        FRONT_URI: ctx.dev
+          ? "http://localhost:9000/"
+          : "http://35.209.32.153/btask/",
+        API_REST: ctx.dev
+          ? "http://localhost:5000/api/v1"
+          : "http://35.209.32.153/api/v1",
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
