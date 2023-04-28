@@ -21,7 +21,9 @@
         color="warning"
         @click="editLink(link)"
       ></q-btn>
-      <q-btn flat color="primary" @click="copyLink(link.nanoLink)">Copy</q-btn>
+      <q-btn flat color="primary" class="btn" @click="copyLink(link.nanoLink)"
+        >Copy</q-btn
+      >
     </q-card-actions>
   </q-card>
 </template>
@@ -30,6 +32,7 @@
 import { useLinkStore } from "src/stores/link-store";
 import { useQuasar } from "quasar";
 import { useNotify } from "src/composables/notifyHook";
+import ClipboardJS from "clipboard";
 
 defineProps({
   link: Object,
@@ -89,7 +92,9 @@ const editLink = async (link) => {
 const copyLink = async (nanoLink) => {
   try {
     const path = `${process.env.FRONT_URI}${nanoLink}`;
-    await navigator.clipboard.writeText(path);
+    const clipboard = new ClipboardJS(".btn", {
+      text: () => path,
+    });
     successNotify("Enlace Copiado");
   } catch (error) {
     if (error.errors) {

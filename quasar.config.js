@@ -63,9 +63,7 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        FRONT_URI: ctx.dev
-          ? "http://localhost:9000/"
-          : "http://35.209.32.153/btask/",
+        FRONT_URI: ctx.dev ? "http://localhost:9000/" : "http://35.209.32.153/",
         API_REST: ctx.dev
           ? "http://localhost:5000/api/v1"
           : "http://35.209.32.153/api/v1",
